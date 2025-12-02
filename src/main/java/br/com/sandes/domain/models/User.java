@@ -1,13 +1,16 @@
 package br.com.sandes.domain.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class User {
 
     private Long id;
     private String name;
     private String email;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
     public User(Long id, String name, String email, LocalDateTime createdAt) {
@@ -26,9 +29,6 @@ public class User {
     public User(String name, String email) {
         this.name = name;
         this.email = email;
-    }
-
-    public User() {
     }
 
     public Long getId() {

@@ -1,5 +1,6 @@
 package br.com.sandes.addapters.outbound.jpa.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.springframework.cglib.core.Local;
 
@@ -28,12 +29,8 @@ public class JpaUserEntity {
     @Column(
             nullable = false,
             name = "created_at")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
 
     public JpaUserEntity(Long id, String name, String email, LocalDateTime createdAt) {
         this.id = id;
@@ -46,6 +43,11 @@ public class JpaUserEntity {
         this.name = name;
         this.email = email;
         this.createdAt = createdAt;
+    }
+
+    public JpaUserEntity(String name, String email) {
+        this.name = name;
+        this.email = email;
     }
 
     public JpaUserEntity() {

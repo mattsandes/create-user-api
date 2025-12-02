@@ -9,6 +9,8 @@ import br.com.sandes.domain.models.User;
 import br.com.sandes.domain.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -45,6 +47,8 @@ public class UserService implements UserUseCases {
         }
 
         var mappedUser = UserMapper.dtoToDomain(userDTO);
+
+        mappedUser.setCreatedAt(LocalDateTime.now());
 
         var createdUser = userRepository.create(mappedUser);
 
